@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp1.Services;
 
 namespace WpfApp1
 {
@@ -21,19 +22,20 @@ namespace WpfApp1
                 Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*\"",
                 Title = "Vyberte XML soubor s daty o prodeji aut"
             };
-            if (dialogWindow.ShowDialog() == true)
+            if (dialogWindow.ShowDialog() != true)
+                return;
+
+            var filePath = dialogWindow.FileName;
+            try
             {
-                var filePath = dialogWindow.FileName;
-                try
-                {
-                    LoadXml(filePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Chyba při načítání dat: {ex.Message}", "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                LoadXml(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Chyba při načítání dat: {ex.Message}", "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void LoadXml(string path)
         {
             var carSales = CarDataLoader.LoadFromXml(path);
