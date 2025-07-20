@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp1.Constants;
 using WpfApp1.Services;
 
 namespace WpfApp1
@@ -19,8 +20,8 @@ namespace WpfApp1
         {
             var dialogWindow = new OpenFileDialog
             {
-                Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*\"",
-                Title = "Vyberte XML soubor s daty o prodeji aut"
+                Filter = DialogTexts.FileDialogFilter,
+                Title = DialogTexts.FileDialogTitle
             };
             if (dialogWindow.ShowDialog() != true)
                 return;
@@ -32,7 +33,7 @@ namespace WpfApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Chyba při načítání dat: {ex.Message}", "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{ErrorMessages.XmlLoadErrorTitle} {ex.Message}", ErrorMessages.GeneralErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -41,7 +42,7 @@ namespace WpfApp1
             var carSales = CarDataLoader.LoadFromXml(path);
             if (carSales == null || carSales.Count == 0)
             {
-                MessageBox.Show("Nebyla nalezena žádná data o prodeji aut.", "Informace", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(ErrorMessages.NoCarDataFound, ErrorMessages.InfoTitle, MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             dataGridAll.ItemsSource = carSales;
@@ -49,7 +50,7 @@ namespace WpfApp1
             var saleSummary = CarDataLoader.GenerateWeekendSaleSummary(carSales);
             if (saleSummary == null || saleSummary.Count == 0)
             {
-                MessageBox.Show("Zadny vikendovy prodej nebyl nalezen.", "Informace", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(ErrorMessages.NoWeekendSalesFound, ErrorMessages.InfoTitle, MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             dataGridSummary.ItemsSource = saleSummary;

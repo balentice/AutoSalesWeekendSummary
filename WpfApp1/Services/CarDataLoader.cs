@@ -11,15 +11,13 @@ namespace WpfApp1.Services
         {
             var xmlDocument = XDocument.Load(path);
             if (xmlDocument == null || xmlDocument.Root == null)
-                throw new InvalidDataException("Nesprávný formát XML: kořenový element chybí");
+                throw new InvalidDataException(ErrorMessages.XmlRootMissing);
 
-            var carSales = xmlDocument.Root
+            return xmlDocument.Root
                 .Elements(XmlConstants.CarTag)
                 .Select(ParseCarSale)
                 .OfType<CarSale>()
                 .ToList();
-
-            return carSales;
         }
 
         public static List<SaleSummary> GenerateWeekendSaleSummary(List<CarSale> sales)
