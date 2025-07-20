@@ -7,6 +7,5 @@ git clone https://github.com/balentice/AutoSalesWeekendSummary.git
 AutoSalesWeekendSummary/Resources/CarSale.xml
 
 4. Spusťte projekt
-5. 
 ## Poznámka
 Soubor `CarSale.xml` obsahuje data o prodeji automobilů a je nezbytný pro správné fungování aplikace (WpfApp1\WpfApp1\Resources\CarSale.xml)
