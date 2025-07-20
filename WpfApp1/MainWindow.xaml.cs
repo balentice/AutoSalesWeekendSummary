@@ -40,6 +40,10 @@ namespace WpfApp1
         private void LoadXml(string path)
         {
             var carSales = CarDataLoader.LoadFromXml(path);
+
+            dataGridAll.ItemsSource = null;
+            dataGridSummary.ItemsSource = null;
+
             if (carSales == null || carSales.Count == 0)
             {
                 MessageBox.Show(ErrorMessages.NoCarDataFound, ErrorMessages.InfoTitle, MessageBoxButton.OK, MessageBoxImage.Information);
