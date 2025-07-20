@@ -22,9 +22,9 @@
             <DataGrid x:Name="dataGridAll" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="*"/>
-                    <DataGridTextColumn Header="Datum prodeje" Binding="{Binding DatumProdeje, StringFormat=\{0:dd.MM.yyyy\}}" Width="*"/>
-                    <DataGridTextColumn Header="Cena" Binding="{Binding Cena, StringFormat=N0}" Width="*"/>
-                    <DataGridTextColumn Header="DPH (%)" Binding="{Binding DPH}" Width="*"/>
+                    <DataGridTextColumn Header="Datum prodeje" Binding="{Binding SaleDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="*"/>
+                    <DataGridTextColumn Header="Cena" Binding="{Binding Price, StringFormat=N0}" Width="*"/>
+                    <DataGridTextColumn Header="DPH (%)" Binding="{Binding VatPercent}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -33,8 +33,8 @@
             <DataGrid x:Name="dataGridSummary" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="*"/>
-                    <DataGridTextColumn Header="Cena bez DPH" Binding="{Binding CenaBezDPH, StringFormat=N0}" Width="*"/>
-                    <DataGridTextColumn Header="Cena s DPH" Binding="{Binding CenaSDPH, StringFormat=N0}" Width="*"/>
+                    <DataGridTextColumn Header="Cena bez DPH" Binding="{Binding TotalPriceWithoutVat, StringFormat=N0}" Width="*"/>
+                    <DataGridTextColumn Header="Cena s DPH" Binding="{Binding TotalPriceWithVat, StringFormat=N0}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
